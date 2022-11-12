@@ -31,7 +31,7 @@ fn main() {
 			println('登录成功, 用户信息已经保存')
 		} 
 	}
-	println('程序将在此每6秒检测一次网络连接性, 你可以将其最小化但请勿关闭')
+	println('连接成功, 程序将在此每6秒检测一次网络连接性, 你可以将其最小化但请勿关闭')
 	println('前往本项目地址了解设置为开机自启的办法')
 	for {
 		if check()! != true {
@@ -113,9 +113,8 @@ fn start_check() !bool {
 	if raw != 'NULL' {
 		ip := get_ip()!
 		payload := raw + '\"$ip\"}'
-		http.post('http://10.255.255.34/api/v1/login/', payload) or {
-			println('Error2: 暂时无法认证, 可能是因为故障, 或欠费/帐号信息有误')
-			return false
+		for (check()! == false) {
+			http.post('http://10.255.255.34/api/v1/login/', payload)!
 		}
 		return true
 	}
@@ -134,7 +133,7 @@ fn no2name(no string) string {
 fn scan() !bool {
 	url := os.config_dir()! + '\\i-nuist-keeper-cache.dat'
 	if start_check()! {
-		println('检测到保存在本地的帐号, 已经使用此帐号登录成功')
+		println('检测到保存在本地的帐号, 正在尝试使你登录')
 		println('如果要使用别的帐号登录, 请在关闭程序后删除$url')
 		return true
 	}
