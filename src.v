@@ -114,7 +114,7 @@ fn start_check() !bool {
 		ip := get_ip()!
 		payload := raw + '\"$ip\"}'
 		for (check()! == false) {
-			http.post('http://10.255.255.34/api/v1/login/', payload)!
+			simple_post(payload)
 		}
 		return true
 	}
@@ -138,4 +138,10 @@ fn scan() !bool {
 		return true
 	}
 	return false
+}
+
+fn simple_post(payload string) http.Response {
+	return http.post('http://10.255.255.34/api/v1/login/', payload) or {
+		simple_post(payload)
+	}
 }
