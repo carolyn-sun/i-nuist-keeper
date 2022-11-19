@@ -46,7 +46,7 @@ fn main() {
 }
 
 fn get_ip() !string {
-	res := http.get('http://10.255.255.34/api/v1/ip') or {
+	res := http.get('http://10.255.255.46/api/v1/ip') or {
 		println('Error1: 无法连接到i-NUIST: 检查你的无线网络设置')
 	}.body
 	if res.all_after('\"code\":').all_before(',\"data\"').contains_any('200') {
@@ -60,7 +60,7 @@ fn login(info Info) !bool {
 	if ip != 'NULL' {
 		payload := '{\"username\":\"$info.acc\",\"password\":\"$info.pwd\",\"channel\":\"$info.isp.no\",' 
 		+ '\"ifautologin\":\"1\",\"pagesign\":\"secondauth\",\"usripadd\":\"$ip\"}'
-		res := http.post('http://10.255.255.34/api/v1/login/', payload) or {
+		res := http.post('http://10.255.255.46/api/v1/login/', payload) or {
 			return false
 		}.body
 		if res.all_after('\"message\": ').all_before_last(',').contains_any('ok') && check()! {
@@ -141,7 +141,7 @@ fn scan() !bool {
 }
 
 fn simple_post(payload string) http.Response {
-	return http.post('http://10.255.255.34/api/v1/login/', payload) or {
+	return http.post('http://10.255.255.46/api/v1/login/', payload) or {
 		simple_post(payload)
 	}
 }
