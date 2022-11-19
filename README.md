@@ -8,7 +8,7 @@
 1. `Win + R`后键入`shell:Common Startup`
 2. 在打开的文件夹中加入本程序的快捷方式即可
 ## 已知问题
-- 可能会因为连上WLAN之后，网关对设备的租期发放的之前的停等时间过长，引发的`response does not start with HTTP/`导致程序崩溃。临时解决办法是重新启动本程序。
+- 可能会因为连上WLAN之后，网关发放租期的等待时间过长，引发的`response does not start with HTTP/`导致程序崩溃。临时解决办法是重新启动本程序。
 ## 版本
 ```text
 V 0.3.2 26d643f
